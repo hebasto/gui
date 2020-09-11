@@ -490,10 +490,11 @@ static UniValue getnetworkinfo(const JSONRPCRequest& request)
                         }},
                         {RPCResult::Type::BOOL, "localrelay", "true if transaction relay is requested from peers"},
                         {RPCResult::Type::NUM, "timeoffset", "the time offset"},
+                        {RPCResult::Type::BOOL, "networkactive", "whether p2p networking is enabled"},
                         {RPCResult::Type::NUM, "connections", "the total number of connections"},
                         {RPCResult::Type::NUM, "connections_in", "the number of inbound connections"},
                         {RPCResult::Type::NUM, "connections_out", "the number of outbound connections"},
-                        {RPCResult::Type::BOOL, "networkactive", "whether p2p networking is enabled"},
+                        {RPCResult::Type::BOOL, "connections_tor_only", "whether all connections are via Tor"},
                         {RPCResult::Type::ARR, "networks", "information per network",
                         {
                             {RPCResult::Type::OBJ, "", "",
@@ -544,6 +545,7 @@ static UniValue getnetworkinfo(const JSONRPCRequest& request)
         obj.pushKV("connections", conn_counts.all);
         obj.pushKV("connections_in", conn_counts.in);
         obj.pushKV("connections_out", conn_counts.out);
+        obj.pushKV("connections_tor_only", conn_counts.tor_only);
     }
     obj.pushKV("networks",      GetNetworksInfo());
     obj.pushKV("relayfee",      ValueFromAmount(::minRelayTxFee.GetFeePerK()));

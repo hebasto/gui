@@ -2598,13 +2598,21 @@ ConnCounts CConnman::ConnectionCounts()
 {
     int num_in{0};
     int num_out{0};
+    bool tor_only{false};
     {
         LOCK(cs_vNodes);
+        if (!vNodes.empty()) tor_only = true;
         for (const auto& pnode : vNodes) {
-            pnode->IsInboundConn() ? ++num_in : ++num_out;
+            if (pnode->IsInboundConn()) {
+                ++num_in;
+                if (fListen) tor_only = false;
+            } else {
+                ++num_out;
+                if (!pnode->addr.IsTor()) tor_only = false;
+            }
         }
     }
-    return {num_in, num_out};
+    return {num_in, num_out, tor_only};
 }
 
 void CConnman::GetNodeStats(std::vector<CNodeStats>& vstats)

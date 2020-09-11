@@ -173,13 +173,14 @@ struct ConnCounts
     const int all{0};
     const int in{0};
     const int out{0};
+    const bool tor_only{false};
 
     ConnCounts()
     {
     }
 
-    ConnCounts(int num_in, int num_out)
-        : all(num_in + num_out), in(num_in), out(num_out)
+    ConnCounts(int num_in, int num_out, bool is_tor_only)
+        : all(num_in + num_out), in(num_in), out(num_out), tor_only(is_tor_only)
     {
     }
 };
