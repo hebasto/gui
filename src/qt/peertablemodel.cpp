@@ -31,8 +31,8 @@ bool NodeLessThan::operator()(const CNodeCombinedStats &left, const CNodeCombine
         return pLeft->addrName.compare(pRight->addrName) < 0;
     case PeerTableModel::Subversion:
         return pLeft->cleanSubVer.compare(pRight->cleanSubVer) < 0;
-    case PeerTableModel::Ping:
-        return pLeft->m_min_ping_usec < pRight->m_min_ping_usec;
+    case PeerTableModel::Our:
+        return pLeft->addrLocal < pRight->addrLocal;
     case PeerTableModel::Sent:
         return pLeft->nSendBytes < pRight->nSendBytes;
     case PeerTableModel::Received:
@@ -104,7 +104,7 @@ PeerTableModel::PeerTableModel(interfaces::Node& node, QObject* parent) :
     m_node(node),
     timer(nullptr)
 {
-    columns << tr("NodeId") << tr("Node/Service") << tr("Ping") << tr("Sent") << tr("Received") << tr("User Agent");
+    columns << tr("NodeId") << tr("Node/Service") << tr("Our") << tr("Sent") << tr("Received") << tr("User Agent");
     priv.reset(new PeerTablePriv());
 
     // set up timer for auto refresh
@@ -160,8 +160,8 @@ QVariant PeerTableModel::data(const QModelIndex &index, int role) const
             return QString(rec->nodeStats.fInbound ? "↓ " : "↑ ") + QString::fromStdString(rec->nodeStats.addrName);
         case Subversion:
             return QString::fromStdString(rec->nodeStats.cleanSubVer);
-        case Ping:
-            return GUIUtil::formatPingTime(rec->nodeStats.m_min_ping_usec);
+        case Our:
+            return QString::fromStdString(rec->nodeStats.addrLocal);
         case Sent:
             return GUIUtil::formatBytes(rec->nodeStats.nSendBytes);
         case Received:
@@ -169,7 +169,6 @@ QVariant PeerTableModel::data(const QModelIndex &index, int role) const
         }
     } else if (role == Qt::TextAlignmentRole) {
         switch (index.column()) {
-            case Ping:
             case Sent:
             case Received:
                 return QVariant(Qt::AlignRight | Qt::AlignVCenter);
