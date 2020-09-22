@@ -2328,6 +2328,9 @@ bool CConnman::InitBinds(const std::vector<CService>& binds, const std::vector<N
         fBound |= Bind(CService(inaddr6_any, GetListenPort()), BF_NONE, NetPermissionFlags::PF_NONE);
         fBound |= Bind(CService(inaddr_any, GetListenPort()), !fBound ? BF_REPORT_ERROR : BF_NONE, NetPermissionFlags::PF_NONE);
     }
+    struct in_addr inaddr_onion_service;
+    inaddr_onion_service.s_addr = htonl(INADDR_LOOPBACK);
+    fBound |= Bind(CService(inaddr_onion_service, BaseParams().OnionServiceTargetPort()), BF_EXPLICIT, NetPermissionFlags::PF_NONE);
     return fBound;
 }
 
