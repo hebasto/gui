@@ -56,10 +56,10 @@ Notificator::Notificator(const QString &_programName, QSystemTrayIcon *_trayIcon
 #endif
 #ifdef Q_OS_MAC
     // check if users OS has support for NSUserNotification
-    RequestAuthorization();
-    // if (MacosUserNotificationHandler::instance()->hasUserNotificationCenterSupport()) {
-    //     mode = UserNotificationCenter;
-    // }
+    // RequestAuthorization();
+    if (MacosUserNotificationHandler::instance()->hasUserNotificationCenterSupport()) {
+        mode = UserNotificationCenter;
+    }
 #endif
 }
 

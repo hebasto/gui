@@ -55,6 +55,8 @@ void MacosUserNotificationHandler::showNotification(const QString& title, const 
 
 bool MacosUserNotificationHandler::hasUserNotificationCenterSupport(void)
 {
+    RequestAuthorization();
+
     Class possibleClass = NSClassFromString(@"NSUserNotificationCenter");
 
     // check if users OS has support for NSUserNotification
