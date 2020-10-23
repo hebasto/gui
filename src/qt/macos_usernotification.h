@@ -18,4 +18,6 @@ struct MacosUserNotificationHandler
     static MacosUserNotificationHandler* instance();
 };
 
+void RequestAuthorization();
+
 #endif // BITCOIN_QT_MACOS_USERNOTIFICATION_H
