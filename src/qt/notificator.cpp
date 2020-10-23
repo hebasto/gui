@@ -23,7 +23,7 @@
 // #define __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES 0
 #ifdef Q_OS_MAC
 #include <ApplicationServices/ApplicationServices.h>
-#include <qt/macnotificationhandler.h>
+#include <qt/macos_usernotification.h>
 #endif
 
 
@@ -56,7 +56,7 @@ Notificator::Notificator(const QString &_programName, QSystemTrayIcon *_trayIcon
 #endif
 #ifdef Q_OS_MAC
     // check if users OS has support for NSUserNotification
-    if( MacNotificationHandler::instance()->hasUserNotificationCenterSupport()) {
+    if (MacosUserNotificationHandler::instance()->hasUserNotificationCenterSupport()) {
         mode = UserNotificationCenter;
     }
 #endif
@@ -225,7 +225,7 @@ void Notificator::notifySystray(Class cls, const QString &title, const QString &
 void Notificator::notifyMacUserNotificationCenter(const QString &title, const QString &text)
 {
     // icon is not supported by the user notification center yet. OSX will use the app icon.
-    MacNotificationHandler::instance()->showNotification(title, text);
+    MacosUserNotificationHandler::instance()->showNotification(title, text);
 }
 #endif
 
