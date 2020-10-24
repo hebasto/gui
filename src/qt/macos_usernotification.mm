@@ -12,22 +12,22 @@
 #include <tinyformat.h>
 // #import "AppDelegate.h"
 
-void RequestAuthorization()
-{
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    UNAuthorizationOptions auth_options = (UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge);
-    [center requestAuthorizationWithOptions:auth_options
-        completionHandler:^(BOOL granted, NSError* error) {
-            if (error) {
-                // tfm::format(std::cerr, "HEBASTO - %s:%s error=%s\n", __func__, __LINE__, messageAsString:error.localizedDescription);
-                tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission ERROR.\n", __func__, __LINE__);
-            } else if (!granted) {
-                tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission is NOT granted.\n", __func__, __LINE__);
-            } else {
-                tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission is GRANTED.\n", __func__, __LINE__);
-            }
-    }];
-}
+// void RequestAuthorization()
+// {
+//     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+//     UNAuthorizationOptions auth_options = (UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge);
+//     [center requestAuthorizationWithOptions:auth_options
+//         completionHandler:^(BOOL granted, NSError* error) {
+//             if (error) {
+//                 // tfm::format(std::cerr, "HEBASTO - %s:%s error=%s\n", __func__, __LINE__, messageAsString:error.localizedDescription);
+//                 tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission ERROR.\n", __func__, __LINE__);
+//             } else if (!granted) {
+//                 tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission is NOT granted.\n", __func__, __LINE__);
+//             } else {
+//                 tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission is GRANTED.\n", __func__, __LINE__);
+//             }
+//     }];
+// }
 
 // Add an obj-c category (extension) to return the expected bundle identifier
 @implementation NSBundle(returnCorrectIdentifier)
@@ -55,14 +55,26 @@ void MacosUserNotificationHandler::showNotification(const QString& title, const 
 
 bool MacosUserNotificationHandler::hasUserNotificationCenterSupport(void)
 {
-    RequestAuthorization();
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    UNAuthorizationOptions auth_options = (UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge);
+    [center requestAuthorizationWithOptions:auth_options
+        completionHandler:^(BOOL granted, NSError* error) {
+            if (error) {
+                // tfm::format(std::cerr, "HEBASTO - %s:%s error=%s\n", __func__, __LINE__, messageAsString:error.localizedDescription);
+                tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission ERROR.\n", __func__, __LINE__);
+            } else if (!granted) {
+                tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission is NOT granted.\n", __func__, __LINE__);
+            } else {
+                tfm::format(std::cerr, "HEBASTO - %s:%s Notifications permission is GRANTED.\n", __func__, __LINE__);
+            }
+    }];
 
-    Class possibleClass = NSClassFromString(@"NSUserNotificationCenter");
+    // Class possibleClass = NSClassFromString(@"NSUserNotificationCenter");
 
-    // check if users OS has support for NSUserNotification
-    if (possibleClass!=nil) {
-        return true;
-    }
+    // // check if users OS has support for NSUserNotification
+    // if (possibleClass!=nil) {
+    //     return true;
+    // }
     return false;
 }
 
