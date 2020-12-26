@@ -7,6 +7,7 @@
 
 #include <chainparams.h>
 #include <qt/guiutil.h>
+#include <util/system.h>
 
 #include <QEasingCurve>
 #include <QPropertyAnimation>
@@ -36,8 +37,10 @@ userClosed(false)
 
     m_animation.setTargetObject(this);
     m_animation.setPropertyName("pos");
-    m_animation.setDuration(300 /* ms */);
-    m_animation.setEasingCurve(QEasingCurve::OutQuad);
+    m_animation.setDuration(gArgs.GetArg("-duration", 300 /* ms */));
+    QEasingCurve easing{QEasingCurve::BezierSpline};
+    easing.addCubicBezierSegment({0.5, 0.0}, {0.2, 1.0}, {1.0, 1.0});
+    m_animation.setEasingCurve(easing);
 }
 
 ModalOverlay::~ModalOverlay()
