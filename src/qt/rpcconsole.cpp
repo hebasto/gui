@@ -1114,11 +1114,11 @@ void RPCConsole::updateDetailWidget()
         peerAddrDetails += "<br />" + tr("via %1").arg(QString::fromStdString(stats->nodeStats.addrLocal));
     ui->peerHeading->setText(peerAddrDetails);
     ui->peerServices->setText(GUIUtil::formatServicesStr(stats->nodeStats.nServices));
-    ui->peerRelayTxes->setText(stats->nodeStats.fRelayTxes ? "Yes" : "No");
+    ui->peerRelayTxes->setText(stats->nodeStats.fRelayTxes ? tr("Yes") : tr("No"));
     QString bip152_hb_settings;
-    if (stats->nodeStats.m_bip152_highbandwidth_to) bip152_hb_settings += "To";
-    if (stats->nodeStats.m_bip152_highbandwidth_from) bip152_hb_settings += (bip152_hb_settings == "" ? "From" : "/From");
-    if (bip152_hb_settings == "") bip152_hb_settings = "No";
+    if (stats->nodeStats.m_bip152_highbandwidth_to) bip152_hb_settings = tr("To");
+    if (stats->nodeStats.m_bip152_highbandwidth_from) bip152_hb_settings += (bip152_hb_settings.isEmpty() ? tr("From") : QLatin1String("/") + tr("From"));
+    if (bip152_hb_settings.isEmpty()) bip152_hb_settings = tr("No");
     ui->peerHighBandwidth->setText(bip152_hb_settings);
     ui->peerLastSend->setText(stats->nodeStats.nLastSend ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastSend) : tr("never"));
     ui->peerLastRecv->setText(stats->nodeStats.nLastRecv ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv) : tr("never"));
