@@ -70,6 +70,8 @@ public:
 
     QString tabTitle(TabTypes tab_type) const;
     QKeySequence tabShortcut(TabTypes tab_type) const;
+    const QString tr_yes{tr("Yes")}, tr_no{tr("No")}, tr_to{tr("To")}, tr_from{tr("From")},
+        tr_ban_for{tr("Ban for")}, tr_na{tr("N/A")}, tr_never{tr("Never")}, tr_unknown{tr("Unknown")};
 
 protected:
     virtual bool eventFilter(QObject* obj, QEvent *event) override;

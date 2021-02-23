@@ -474,9 +474,9 @@ RPCConsole::RPCConsole(interfaces::Node& node, const PlatformStyle *_platformSty
     const QString list{"<ul><li>" + Join(CONNECTION_TYPE_DOC, QString("</li><li>")) + "</li></ul>"};
     ui->peerConnectionTypeLabel->setToolTip(ui->peerConnectionTypeLabel->toolTip().arg(list));
     const QString hb_list{"<ul><li>\""
-        + tr("To") + "\" – " + tr("we selected the peer for high bandwidth relay") + "</li><li>\""
-        + tr("From") + "\" – " + tr("the peer selected us for high bandwidth relay") + "</li><li>\""
-        + tr("No") + "\" – " + tr("no high bandwidth relay selected") + "</li></ul>"};
+        + tr_to + "\" – " + tr("we selected the peer for high bandwidth relay") + "</li><li>\""
+        + tr_from + "\" – " + tr("the peer selected us for high bandwidth relay") + "</li><li>\""
+        + tr_no + "\" – " + tr("no high bandwidth relay selected") + "</li></ul>"};
     ui->peerHighBandwidthLabel->setToolTip(ui->peerHighBandwidthLabel->toolTip().arg(hb_list));
     ui->dataDir->setToolTip(ui->dataDir->toolTip().arg(QString(nonbreaking_hyphen) + "datadir"));
     ui->blocksDir->setToolTip(ui->blocksDir->toolTip().arg(QString(nonbreaking_hyphen) + "blocksdir"));
@@ -619,10 +619,10 @@ void RPCConsole::setClientModel(ClientModel *model, int bestblock_height, int64_
 
         // create peer table context menu actions
         QAction* disconnectAction = new QAction(tr("&Disconnect"), this);
-        QAction* banAction1h      = new QAction(tr("Ban for") + " " + tr("1 &hour"), this);
-        QAction* banAction24h     = new QAction(tr("Ban for") + " " + tr("1 &day"), this);
-        QAction* banAction7d      = new QAction(tr("Ban for") + " " + tr("1 &week"), this);
-        QAction* banAction365d    = new QAction(tr("Ban for") + " " + tr("1 &year"), this);
+        QAction* banAction1h = new QAction(tr_ban_for + " " + tr("1 &hour"), this);
+        QAction* banAction24h = new QAction(tr_ban_for + " " + tr("1 &day"), this);
+        QAction* banAction7d = new QAction(tr_ban_for + " " + tr("1 &week"), this);
+        QAction* banAction365d = new QAction(tr_ban_for + " " + tr("1 &year"), this);
 
         // create peer table context menu
         peersTableContextMenu = new QMenu(this);
@@ -1114,14 +1114,14 @@ void RPCConsole::updateDetailWidget()
         peerAddrDetails += "<br />" + tr("via %1").arg(QString::fromStdString(stats->nodeStats.addrLocal));
     ui->peerHeading->setText(peerAddrDetails);
     ui->peerServices->setText(GUIUtil::formatServicesStr(stats->nodeStats.nServices));
-    ui->peerRelayTxes->setText(stats->nodeStats.fRelayTxes ? tr("Yes") : tr("No"));
+    ui->peerRelayTxes->setText(stats->nodeStats.fRelayTxes ? tr_yes : tr_no);
     QString bip152_hb_settings;
-    if (stats->nodeStats.m_bip152_highbandwidth_to) bip152_hb_settings = tr("To");
-    if (stats->nodeStats.m_bip152_highbandwidth_from) bip152_hb_settings += (bip152_hb_settings.isEmpty() ? tr("From") : QLatin1String("/") + tr("From"));
-    if (bip152_hb_settings.isEmpty()) bip152_hb_settings = tr("No");
+    if (stats->nodeStats.m_bip152_highbandwidth_to) bip152_hb_settings = tr_to;
+    if (stats->nodeStats.m_bip152_highbandwidth_from) bip152_hb_settings += (bip152_hb_settings.isEmpty() ? tr_from : QLatin1String("/") + tr_from);
+    if (bip152_hb_settings.isEmpty()) bip152_hb_settings = tr_no;
     ui->peerHighBandwidth->setText(bip152_hb_settings);
-    ui->peerLastSend->setText(stats->nodeStats.nLastSend ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastSend) : tr("never"));
-    ui->peerLastRecv->setText(stats->nodeStats.nLastRecv ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv) : tr("never"));
+    ui->peerLastSend->setText(stats->nodeStats.nLastSend ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastSend) : tr_never);
+    ui->peerLastRecv->setText(stats->nodeStats.nLastRecv ? GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nLastRecv) : tr_never);
     ui->peerBytesSent->setText(GUIUtil::formatBytes(stats->nodeStats.nSendBytes));
     ui->peerBytesRecv->setText(GUIUtil::formatBytes(stats->nodeStats.nRecvBytes));
     ui->peerConnTime->setText(GUIUtil::formatDurationStr(GetSystemTimeInSeconds() - stats->nodeStats.nTimeConnected));
@@ -1133,7 +1133,7 @@ void RPCConsole::updateDetailWidget()
     ui->peerConnectionType->setText(GUIUtil::ConnectionTypeToQString(stats->nodeStats.m_conn_type, /* prepend_direction */ true));
     ui->peerNetwork->setText(GUIUtil::NetworkToQString(stats->nodeStats.m_network));
     if (stats->nodeStats.m_permissionFlags == PF_NONE) {
-        ui->peerPermissions->setText(tr("N/A"));
+        ui->peerPermissions->setText(tr_na);
     } else {
         QStringList permissions;
         for (const auto& permission : NetPermissions::ToStrings(stats->nodeStats.m_permissionFlags)) {
@@ -1141,23 +1141,23 @@ void RPCConsole::updateDetailWidget()
         }
         ui->peerPermissions->setText(permissions.join(" & "));
     }
-    ui->peerMappedAS->setText(stats->nodeStats.m_mapped_as != 0 ? QString::number(stats->nodeStats.m_mapped_as) : tr("N/A"));
+    ui->peerMappedAS->setText(stats->nodeStats.m_mapped_as != 0 ? QString::number(stats->nodeStats.m_mapped_as) : tr_na);
 
     // This check fails for example if the lock was busy and
     // nodeStateStats couldn't be fetched.
     if (stats->fNodeStateStatsAvailable) {
         // Sync height is init to -1
-        if (stats->nodeStateStats.nSyncHeight > -1)
+        if (stats->nodeStateStats.nSyncHeight > -1) {
             ui->peerSyncHeight->setText(QString("%1").arg(stats->nodeStateStats.nSyncHeight));
-        else
-            ui->peerSyncHeight->setText(tr("Unknown"));
-
+        } else {
+            ui->peerSyncHeight->setText(tr_unknown);
+        }
         // Common height is init to -1
-        if (stats->nodeStateStats.nCommonHeight > -1)
+        if (stats->nodeStateStats.nCommonHeight > -1) {
             ui->peerCommonHeight->setText(QString("%1").arg(stats->nodeStateStats.nCommonHeight));
-        else
-            ui->peerCommonHeight->setText(tr("Unknown"));
-
+        } else {
+            ui->peerCommonHeight->setText(tr_unknown);
+        }
         ui->peerHeight->setText(QString::number(stats->nodeStateStats.m_starting_height));
         ui->peerPingWait->setText(GUIUtil::formatPingTime(stats->nodeStateStats.m_ping_wait_usec));
     }
