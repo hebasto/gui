@@ -70,8 +70,6 @@ public:
 
     QString tabTitle(TabTypes tab_type) const;
     QKeySequence tabShortcut(TabTypes tab_type) const;
-    const QString tr_yes{tr("Yes")}, tr_no{tr("No")}, tr_to{tr("To")}, tr_from{tr("From")},
-        tr_ban_for{tr("Ban for")}, tr_na{tr("N/A")}, tr_never{tr("Never")}, tr_unknown{tr("Unknown")};
 
 protected:
     virtual bool eventFilter(QObject* obj, QEvent *event) override;
@@ -138,6 +136,11 @@ Q_SIGNALS:
     void cmdRequest(const QString &command, const WalletModel* wallet_model);
 
 private:
+    struct TranslatedStrings {
+        const QString yes{tr("Yes")}, no{tr("No")}, to{tr("To")}, from{tr("From")},
+            ban_for{tr("Ban for")}, na{tr("N/A")}, never{tr("Never")}, unknown{tr("Unknown")};
+    } const ts;
+
     void startExecutor();
     void setTrafficGraphRange(int mins);
 
