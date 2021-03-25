@@ -398,7 +398,7 @@
          <item>
           <widget class="QLabel" name="proxyReachIPv4Label">
            <property name="text">
-            <string>IPv4</string>
+            <string notr="true">IPv4</string>
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
@@ -421,7 +421,7 @@
          <item>
           <widget class="QLabel" name="proxyReachIPv6Label">
            <property name="text">
-            <string>IPv6</string>
+            <string notr="true">IPv6</string>
            </property>
            <property name="textFormat">
             <enum>Qt::PlainText</enum>
