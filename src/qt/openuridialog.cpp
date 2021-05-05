@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2019 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,13 +8,16 @@
 #include <qt/guiutil.h>
 #include <qt/sendcoinsrecipient.h>
 
+#include <QClipboard>
 #include <QUrl>
 
-OpenURIDialog::OpenURIDialog(QWidget *parent) :
+OpenURIDialog::OpenURIDialog(const PlatformStyle *platformStyle, QWidget *parent) :
     QDialog(parent, GUIUtil::dialog_flags),
     ui(new Ui::OpenURIDialog)
 {
     ui->setupUi(this);
+    ui->pasteButton->setIcon(platformStyle->SingleColorIcon(":/icons/editpaste"));
+    QObject::connect(ui->pasteButton, &QPushButton::clicked, ui->uriEdit, &QLineEdit::paste);
 
     GUIUtil::handleCloseWindowShortcut(this);
 }

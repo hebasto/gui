@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,6 +6,8 @@
 #define BITCOIN_QT_OPENURIDIALOG_H
 
 #include <QDialog>
+
+#include <qt/platformstyle.h>
 
 namespace Ui {
     class OpenURIDialog;
@@ -16,7 +18,7 @@ class OpenURIDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit OpenURIDialog(QWidget *parent);
+    explicit OpenURIDialog(const PlatformStyle* platformStyle, QWidget *parent);
     ~OpenURIDialog();
 
     QString getURI();
