@@ -18,7 +18,7 @@ class OpenURIDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit OpenURIDialog(const PlatformStyle* platformStyle, QWidget *parent);
+    explicit OpenURIDialog(const PlatformStyle* platformStyle, QWidget* parent);
     ~OpenURIDialog();
 
     QString getURI();
