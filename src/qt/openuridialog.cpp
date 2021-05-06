@@ -11,7 +11,7 @@
 #include <QClipboard>
 #include <QUrl>
 
-OpenURIDialog::OpenURIDialog(const PlatformStyle *platformStyle, QWidget *parent) :
+OpenURIDialog::OpenURIDialog(const PlatformStyle* platformStyle, QWidget* parent) :
     QDialog(parent, GUIUtil::dialog_flags),
     ui(new Ui::OpenURIDialog)
 {
