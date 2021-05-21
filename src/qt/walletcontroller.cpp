@@ -40,10 +40,6 @@ WalletController::WalletController(ClientModel& client_model, const PlatformStyl
         getOrCreateWallet(std::move(wallet));
     });
 
-    for (std::unique_ptr<interfaces::Wallet>& wallet : m_node.walletClient().getWallets()) {
-        getOrCreateWallet(std::move(wallet));
-    }
-
     m_activity_worker->moveToThread(m_activity_thread);
     m_activity_thread->start();
     QTimer::singleShot(0, m_activity_worker, []() {
