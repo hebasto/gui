@@ -329,3 +329,21 @@ void OpenWalletActivity::open(const std::string& path)
         QTimer::singleShot(0, this, &OpenWalletActivity::finish);
     });
 }
+
+LoadWalletsActivity::LoadWalletsActivity(WalletController* wallet_controller, QWidget* parent_widget)
+    : WalletControllerActivity(wallet_controller, parent_widget)
+{
+}
+
+void LoadWalletsActivity::load()
+{
+    showProgressDialog(tr("Loading wallets…"));
+
+    QTimer::singleShot(0, worker(), [this] {
+        for (std::unique_ptr<interfaces::Wallet>& wallet : node().walletClient().getWallets()) {
+            m_wallet_controller->getOrCreateWallet(std::move(wallet));
+        }
+
+        QTimer::singleShot(0, this, [this] { Q_EMIT finished(); });
+    });
+}
