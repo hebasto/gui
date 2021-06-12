@@ -55,6 +55,9 @@
 #include <optional>
 #include <string>
 
+#include <chrono>
+#include <thread>
+
 #include <boost/algorithm/string/replace.hpp>
 
 #define MICRO 0.000001
@@ -2785,7 +2788,11 @@ bool CChainState::ActivateBestChain(BlockValidationState &state, const CChainPar
                     GetMainSignals().BlockConnected(trace.pblock, trace.pindex);
                 }
             } while (!m_chain.Tip() || (starting_tip && CBlockIndexWorkComparator()(m_chain.Tip(), starting_tip)));
-            if (!blocks_connected) return true;
+            if (!blocks_connected) {
+                tfm::format(std::cerr, "HEBASTO - %s:%s\n", __func__, __LINE__);
+                std::this_thread::sleep_for(std::chrono::seconds{20});
+                return true;
+            }
 
             const CBlockIndex* pindexFork = m_chain.FindFork(starting_tip);
             bool fInitialDownload = IsInitialBlockDownload();
