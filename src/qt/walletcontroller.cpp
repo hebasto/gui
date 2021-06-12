@@ -336,6 +336,7 @@ void LoadWalletsActivity::load()
     showProgressDialog(tr("Loading wallets…"));
 
     QTimer::singleShot(0, worker(), [this] {
+        node().appInitStartClients();
         for (std::unique_ptr<interfaces::Wallet>& wallet : node().walletClient().getWallets()) {
             m_wallet_controller->getOrCreateWallet(std::move(wallet));
         }
