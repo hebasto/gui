@@ -372,7 +372,6 @@ void BitcoinGUI::createActions()
     m_mask_values_action->setStatusTip(tr("Mask the values in the Overview tab"));
     m_mask_values_action->setCheckable(true);
 
-    connect(quitAction, &QAction::triggered, this, &BitcoinGUI::quitRequested);
     connect(aboutAction, &QAction::triggered, this, &BitcoinGUI::aboutClicked);
     connect(aboutQtAction, &QAction::triggered, qApp, QApplication::aboutQt);
     connect(optionsAction, &QAction::triggered, this, &BitcoinGUI::optionsClicked);
@@ -380,7 +379,11 @@ void BitcoinGUI::createActions()
     connect(showHelpMessageAction, &QAction::triggered, this, &BitcoinGUI::showHelpMessageClicked);
     connect(openRPCConsoleAction, &QAction::triggered, this, &BitcoinGUI::showDebugWindow);
     // prevents an open debug window from becoming stuck/unusable on client shutdown
-    connect(quitAction, &QAction::triggered, rpcConsole, &QWidget::hide);
+    connect(quitAction, &QAction::triggered, [rpcConsole, this] {
+        std::cerr << "HEBASTO - " << __FILE__ << ":" << __LINE__ << " " << __func__ << std::endl;
+        rpcConsole->hide();
+        Q_EMIT quitRequested();
+    };
 
 #ifdef ENABLE_WALLET
     if(walletFrame)
@@ -813,10 +816,8 @@ void BitcoinGUI::createTrayIconMenu()
     }
     trayIconMenu->addAction(optionsAction);
     trayIconMenu->addAction(openRPCConsoleAction);
-#ifndef Q_OS_MAC // This is built-in on macOS
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
-#endif
 }
 
 #ifndef Q_OS_MAC
