@@ -7,6 +7,9 @@
 #include <AppKit/AppKit.h>
 #include <objc/runtime.h>
 
+#include <QDebug>
+
+
 static MacDockIconHandler *s_instance = nullptr;
 
 bool dockClickHandler(id self, SEL _cmd, ...) {
@@ -50,4 +53,16 @@ void MacDockIconHandler::cleanup()
 void ForceActivation()
 {
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
+
+bool MyCocoaEventFilter::nativeEventFilter(const QByteArray &eventType, void *message, long *)
+{
+    if (eventType == "mac_generic_NSEvent") {
+        NSEvent *event = static_cast<NSEvent *>(message);
+        try {
+            auto s = QString::fromNSString([event characters]);
+        } catch (...) {}
+        qDebug() << s;
+    }
+    return false;
 }
