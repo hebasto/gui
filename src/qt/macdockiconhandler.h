@@ -5,6 +5,7 @@
 #ifndef BITCOIN_QT_MACDOCKICONHANDLER_H
 #define BITCOIN_QT_MACDOCKICONHANDLER_H
 
+#include <QAbstractNativeEventFilter>
 #include <QObject>
 
 /** macOS-specific Dock icon handler.
@@ -22,6 +23,12 @@ Q_SIGNALS:
 
 private:
     MacDockIconHandler();
+};
+
+class MyCocoaEventFilter : public QAbstractNativeEventFilter
+{
+public:
+    bool nativeEventFilter(const QByteArray &eventType, void *message, long *) override;
 };
 
 #endif // BITCOIN_QT_MACDOCKICONHANDLER_H

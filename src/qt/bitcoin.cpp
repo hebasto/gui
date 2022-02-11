@@ -8,6 +8,10 @@
 
 #include <qt/bitcoin.h>
 
+#ifdef Q_OS_MAC
+#include <qt/macdockiconhandler.h>
+#endif
+
 #include <chainparams.h>
 #include <init.h>
 #include <interfaces/handler.h>
@@ -607,6 +611,9 @@ int GuiMain(int argc, char* argv[])
 #endif // ENABLE_WALLET
 
     /// 9. Main GUI initialization
+#ifdef Q_OS_MAC
+    app.installNativeEventFilter(new MyCocoaEventFilter());
+#endif
     // Install global event filter that makes sure that out-of-focus labels do not contain text cursor.
     app.installEventFilter(new GUIUtil::LabelOutOfFocusEventFilter(&app));
 #if defined(Q_OS_WIN)
