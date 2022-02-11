@@ -51,3 +51,15 @@ void ForceActivation()
 {
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
 }
+
+bool CocoaNativeEventFilter::nativeEventFilter(const QByteArray &eventType, void *message, long *)
+{
+    if (eventType == "mac_generic_NSEvent") {
+        NSEvent *event = static_cast<NSEvent *>(message);
+        // if ([event type] == NSKeyDown) {
+            // Handle key event
+            qDebug() << QString::fromNSString([event characters]);
+        // }
+    }
+    return false;
+}
