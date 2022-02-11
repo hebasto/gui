@@ -265,7 +265,6 @@ void BitcoinApplication::createOptionsModel(bool resetSettings)
 void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
 {
     window = new BitcoinGUI(node(), platformStyle, networkStyle, nullptr);
-    connect(window, &BitcoinGUI::quitRequested, this, &BitcoinApplication::requestShutdown);
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, &QTimer::timeout, window, &BitcoinGUI::detectShutdown);
@@ -302,9 +301,11 @@ void BitcoinApplication::startThread()
 
     /*  communication to and from thread */
     connect(&m_executor.value(), &InitExecutor::initializeResult, this, &BitcoinApplication::initializeResult);
-    connect(&m_executor.value(), &InitExecutor::shutdownResult, this, &QCoreApplication::quit);
     connect(&m_executor.value(), &InitExecutor::runawayException, this, &BitcoinApplication::handleRunawayException);
     connect(this, &BitcoinApplication::requestedInitialize, &m_executor.value(), &InitExecutor::initialize);
+
+    // Being able to handle macOS Dock menu "Quit" item.
+    connect(this, &QCoreApplication::aboutToQuit, this, &BitcoinApplication::requestShutdown);
     connect(this, &BitcoinApplication::requestedShutdown, &m_executor.value(), &InitExecutor::shutdown);
 }
 
@@ -419,7 +420,7 @@ void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHead
         pollShutdownTimer->start(SHUTDOWN_POLLING_DELAY);
     } else {
         Q_EMIT splashFinished(); // Make sure splash screen doesn't stick around during shutdown
-        requestShutdown();
+        QCoreApplication::quit();
     }
 }
 
