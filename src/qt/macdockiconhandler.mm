@@ -7,6 +7,8 @@
 #include <AppKit/AppKit.h>
 #include <objc/runtime.h>
 
+#include <QDebug>
+
 static MacDockIconHandler *s_instance = nullptr;
 
 bool dockClickHandler(id self, SEL _cmd, ...) {
@@ -50,4 +52,13 @@ void MacDockIconHandler::cleanup()
 void ForceActivation()
 {
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+    std::cerr << "HEBASTO - " << __FILE__ << ":" << __LINE__ << " " << std::endl;
+    qDebug() << "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh";
+    std::cerr << "HEBASTO - " << __FILE__ << ":" << __LINE__ << " " << std::endl;
+
+    return NSTerminateCancel;
 }
