@@ -1438,9 +1438,12 @@ if test "$use_external_signer" != "no"; then
     ;;
     *)
       AC_MSG_CHECKING([whether Boost.Process can be used])
+      TEMP_LDFLAGS="$LDFLAGS"
+      LDFLAGS="$TEMP_LDFLAGS $PTHREAD_CFLAGS"
       AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <boost/process.hpp>]])],
         [have_boost_process="yes"],
         [have_boost_process="no"])
+      LDFLAGS="$TEMP_LDFLAGS"
       AC_MSG_RESULT([$have_boost_process])
       if test "$have_boost_process" == "yes"; then
         use_external_signer="yes"
@@ -1980,4 +1983,7 @@ echo "  CXX             = $CXX"
 echo "  CXXFLAGS        = $LTO_CXXFLAGS $DEBUG_CXXFLAGS $HARDENED_CXXFLAGS $WARN_CXXFLAGS $NOWARN_CXXFLAGS $ERROR_CXXFLAGS $GPROF_CXXFLAGS $CXXFLAGS"
 echo "  LDFLAGS         = $LTO_LDFLAGS $PTHREAD_LIBS $HARDENED_LDFLAGS $GPROF_LDFLAGS $LDFLAGS"
 echo "  ARFLAGS         = $ARFLAGS"
+echo
+echo "  PTHREAD_CFLAGS  = $PTHREAD_CFLAGS"
+echo "  PTHREAD_LIBS    = $PTHREAD_LIBS"
 echo
