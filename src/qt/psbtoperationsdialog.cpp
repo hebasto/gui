@@ -213,7 +213,7 @@ std::string PSBTOperationsDialog::renderTransaction(const PartiallySignedTransac
     size_t num_unsigned = CountPSBTUnsignedInputs(psbtx);
     if (num_unsigned > 0) {
         tx_description.append("<br><br>");
-        tx_description.append(tr("Transaction has %1 unsigned inputs.").arg(QString::number(num_unsigned)));
+        tx_description.append(tr("Transaction has %n unsigned input(s).", "", num_unsigned));
     }
 
     return tx_description.toStdString();
