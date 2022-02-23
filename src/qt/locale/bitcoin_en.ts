@@ -2227,10 +2227,13 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <source>or</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location line="+6"/>
-        <source>Transaction has %1 unsigned inputs.</source>
-        <translation type="unfinished"></translation>
+        <source>Transaction has %n unsigned input(s).</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location line="+46"/>

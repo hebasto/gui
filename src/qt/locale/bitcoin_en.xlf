@@ -1947,10 +1947,15 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <source xml:space="preserve">or</source>
         <context-group purpose="location"><context context-type="linenumber">210</context></context-group>
       </trans-unit>
-      <trans-unit id="_msg438">
-        <source xml:space="preserve">Transaction has %1 unsigned inputs.</source>
+      <group restype="x-gettext-plurals">
         <context-group purpose="location"><context context-type="linenumber">216</context></context-group>
-      </trans-unit>
+        <trans-unit id="_msg438[0]">
+          <source xml:space="preserve">Transaction has %n unsigned input(s).</source>
+        </trans-unit>
+        <trans-unit id="_msg438[1]">
+          <source xml:space="preserve">Transaction has %n unsigned input(s).</source>
+        </trans-unit>
+      </group>
       <trans-unit id="_msg439">
         <source xml:space="preserve">Transaction is missing some information about inputs.</source>
         <context-group purpose="location"><context context-type="linenumber">262</context></context-group>
