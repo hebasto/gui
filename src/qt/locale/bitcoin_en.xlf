@@ -1950,10 +1950,10 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
       <group restype="x-gettext-plurals">
         <context-group purpose="location"><context context-type="linenumber">216</context></context-group>
         <trans-unit id="_msg438[0]">
-          <source xml:space="preserve">Transaction has %n unsigned input(s).</source>
+          <source xml:space="preserve">Transaction has %n unsigned input.</source>
         </trans-unit>
         <trans-unit id="_msg438[1]">
-          <source xml:space="preserve">Transaction has %n unsigned input(s).</source>
+          <source xml:space="preserve">Transaction has %n unsigned inputs.</source>
         </trans-unit>
       </group>
       <trans-unit id="_msg439">

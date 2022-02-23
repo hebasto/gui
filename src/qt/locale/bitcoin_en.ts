@@ -2230,9 +2230,9 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
     <message numerus="yes">
         <location line="+6"/>
         <source>Transaction has %n unsigned input(s).</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Transaction has %n unsigned input.</numerusform>
+            <numerusform>Transaction has %n unsigned inputs.</numerusform>
         </translation>
     </message>
     <message>
