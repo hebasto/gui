@@ -74,15 +74,45 @@ git commit -a
 **Do not directly download translations** one by one from the Transifex website, as we do a few post-processing steps before committing the translations.
 
 ### Handling Plurals (in source files)
-When new plurals are added to the source file, it's important to do the following steps:
+When new plurals are added to the source file, it's required to manually modify files as in the followed examples:
 
-1. Open `bitcoin_en.ts` in Qt Linguist (included in the Qt SDK)
-2. Search for `%n`, which will take you to the parts in the translation that use plurals
-3. Look for empty `English Translation (Singular)` and `English Translation (Plural)` fields
-4. Add the appropriate strings for the singular and plural form of the base string
-5. Mark the item as done (via the green arrow symbol in the toolbar)
-6. Repeat from step 2, until all singular and plural forms are in the source file
-7. Save the source file
+- `bitcoin_en.ts` 
+
+```diff
+--- a/src/qt/locale/bitcoin_en.ts
++++ b/src/qt/locale/bitcoin_en.ts
+     <message numerus="yes">
+         <location line="+6"/>
+         <source>Transaction has %n unsigned input(s).</source>
+-        <translation type="unfinished">
+-            <numerusform></numerusform>
+-            <numerusform></numerusform>
++        <translation>
++            <numerusform>Transaction has %n unsigned input.</numerusform>
++            <numerusform>Transaction has %n unsigned inputs.</numerusform>
+         </translation>
+     </message>
+     <message>
+```
+
+- `bitcoin_en.xlf`
+
+```diff
+--- a/src/qt/locale/bitcoin_en.xlf
++++ b/src/qt/locale/bitcoin_en.xlf
+       <group restype="x-gettext-plurals">
+         <context-group purpose="location"><context context-type="linenumber">216</context></context-group>
+         <trans-unit id="_msg438[0]">
+-          <source xml:space="preserve">Transaction has %n unsigned input(s).</source>
++          <source xml:space="preserve">Transaction has %n unsigned input.</source>
+         </trans-unit>
+         <trans-unit id="_msg438[1]">
+-          <source xml:space="preserve">Transaction has %n unsigned input(s).</source>
++          <source xml:space="preserve">Transaction has %n unsigned inputs.</source>
+         </trans-unit>
+       </group>
+       <trans-unit id="_msg439">
+```
 
 ### Translating a new language
 To create a new language template, you will need to edit the languages manifest file `src/qt/bitcoin_locale.qrc` and add a new entry. Below is an example of the English language entry.
