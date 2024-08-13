@@ -1105,7 +1105,7 @@ Signing is only possible with addresses of the type &apos;legacy&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+298"/>
+        <location line="+294"/>
         <source>(%1 locked)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2556,12 +2556,12 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location filename="../guiutil.cpp" line="+139"/>
+        <location filename="../guiutil.cpp" line="+138"/>
         <source>Enter a Bitcoin address (e.g. %1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+288"/>
+        <location line="+295"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2748,7 +2748,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../rpcconsole.cpp" line="+1008"/>
+        <location filename="../rpcconsole.cpp" line="+1021"/>
         <source>%1 kB</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2856,11 +2856,11 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <location line="+26"/>
         <location line="+36"/>
         <location line="+23"/>
-        <location line="+36"/>
+        <location line="+71"/>
         <location line="+23"/>
         <location line="+36"/>
         <location line="+23"/>
-        <location line="+692"/>
+        <location line="+767"/>
         <location line="+26"/>
         <location line="+26"/>
         <location line="+26"/>
@@ -2893,7 +2893,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation>N/A</translation>
     </message>
     <message>
-        <location line="-1649"/>
+        <location line="-1759"/>
         <source>Client version</source>
         <translation>Client version</translation>
     </message>
@@ -2934,12 +2934,12 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location line="+29"/>
-        <location line="+944"/>
+        <location line="+1054"/>
         <source>Network</source>
         <translation>Network</translation>
     </message>
     <message>
-        <location line="-937"/>
+        <location line="-1047"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2949,7 +2949,17 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation>Number of connections</translation>
     </message>
     <message>
-        <location line="+29"/>
+        <location line="+23"/>
+        <source>Local Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <source>Network addresses that your Bitcoin node is currently using to communicate with other nodes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+13"/>
         <source>Block chain</source>
         <translation>Block chain</translation>
     </message>
@@ -2985,18 +2995,18 @@ If you are receiving this error you should request the merchant provide a BIP21 
     </message>
     <message>
         <location line="+80"/>
-        <location line="+760"/>
+        <location line="+835"/>
         <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-680"/>
-        <location line="+657"/>
+        <location line="-755"/>
+        <location line="+732"/>
         <source>Sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-616"/>
+        <location line="-691"/>
         <source>&amp;Peers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3006,13 +3016,23 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+68"/>
+        <location line="+76"/>
         <location filename="../rpcconsole.cpp" line="+166"/>
         <source>Select a peer to view detailed information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+52"/>
+        <source>Hide Peers Detail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Ctrl+X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+74"/>
         <source>The transport layer version: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3108,18 +3128,18 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1616"/>
-        <location line="+1103"/>
+        <location line="-1726"/>
+        <location line="+1213"/>
         <source>User Agent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1177"/>
+        <location line="-1287"/>
         <source>Node window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+253"/>
+        <location line="+288"/>
         <source>Current block height</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3139,7 +3159,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+546"/>
+        <location line="+621"/>
         <source>Permissions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3235,7 +3255,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-1310"/>
+        <location line="-1385"/>
         <source>Last block time</source>
         <translation>Last block time</translation>
     </message>
@@ -3260,7 +3280,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-204"/>
+        <location filename="../rpcconsole.cpp" line="-216"/>
         <source>In:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3310,7 +3330,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../rpcconsole.cpp" line="-476"/>
+        <location filename="../rpcconsole.cpp" line="-477"/>
         <source>Inbound: initiated by peer</source>
         <extracomment>Explanatory text for an inbound peer connection.</extracomment>
         <translation type="unfinished"></translation>
@@ -3403,7 +3423,7 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+153"/>
+        <location line="+154"/>
         <source>&amp;Copy address</source>
         <extracomment>Context menu action to copy the address of a peer.</extracomment>
         <translation type="unfinished"></translation>
@@ -3450,12 +3470,17 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+80"/>
+        <location line="+13"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+79"/>
         <source>Executing command without any wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+325"/>
+        <location line="+326"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3480,12 +3505,12 @@ If you are receiving this error you should request the merchant provide a BIP21 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-348"/>
+        <location line="-349"/>
         <source>Executing command using &quot;%1&quot; wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-149"/>
+        <location line="-161"/>
         <source>Welcome to the %1 RPC console.
 Use up and down arrows to navigate history, and %2 to clear screen.
 Use %3 and %4 to increase or decrease the font size.
@@ -3497,7 +3522,7 @@ For more information on using this console, type %6.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+159"/>
+        <location line="+171"/>
         <source>Executing…</source>
         <extracomment>A console message indicating an entered command is currently being executed.</extracomment>
         <translation type="unfinished"></translation>
@@ -5417,7 +5442,7 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+7"/>
+        <location line="+4"/>
         <source>Cannot downgrade wallet from version %i to version %i. Wallet version unchanged.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5662,17 +5687,12 @@ Go to File &gt; Open Wallet to load a wallet.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="-255"/>
+        <location line="-252"/>
         <source>%s is set very high! Fees this large could be paid on a single transaction.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>A forked headers-chain with more work than the chain with the snapshot base block header exists. Please proceed to sync without AssumeUtxo.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+8"/>
+        <location line="+11"/>
         <source>Cannot provide specific connections and have addrman find outgoing connections at the same time.</source>
         <translation type="unfinished"></translation>
     </message>
