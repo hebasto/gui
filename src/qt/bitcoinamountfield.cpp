@@ -14,6 +14,7 @@
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QLineEdit>
+#include <QtLogging>
 #include <QVariant>
 
 #include <cassert>
@@ -119,18 +120,29 @@ public:
 
     QSize minimumSizeHint() const override
     {
+        qInfo() << "+++ AmountSpinBox::minimumSizeHint()";
+
         if(cachedMinimumSizeHint.isEmpty())
         {
+            qInfo() << "+++ size() BEFORE ensurePolished(): " << size();
+
             ensurePolished();
+
+            qInfo() << "+++ size() AFTER ensurePolished(): " << size();
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
             int w = GUIUtil::TextWidth(fm, BitcoinUnits::format(BitcoinUnit::BTC, BitcoinUnits::maxMoney(), false, BitcoinUnits::SeparatorStyle::ALWAYS));
             w += 2; // cursor blinking space
 
+            qInfo() << "+++ h=" << h << "; w=" << w;
+
             QStyleOptionSpinBox opt;
             initStyleOption(&opt);
             QSize hint(w, h);
+
+            qInfo() << "+++ hint BEFORE calculations: " << hint;
+
             QSize extra(35, 6);
             opt.rect.setSize(hint + extra);
             extra += hint - style()->subControlRect(QStyle::CC_SpinBox, &opt,
@@ -142,9 +154,13 @@ public:
             hint += extra;
             hint.setHeight(h);
 
+            qInfo() << "+++ hint AFTER calculations: " << hint;
+
             opt.rect = rect();
 
             cachedMinimumSizeHint = style()->sizeFromContents(QStyle::CT_SpinBox, &opt, hint, this);
+
+            qInfo() << "+++ cachedMinimumSizeHint: " << cachedMinimumSizeHint;
         }
         return cachedMinimumSizeHint;
     }
