@@ -317,9 +317,6 @@ namespace GUIUtil
 
     /**
      * Returns the distance in pixels appropriate for drawing a subsequent character after text.
-     *
-     * In Qt 5.12 and before the QFontMetrics::width() is used and it is deprecated since Qt 5.13.
-     * In Qt 5.11 the QFontMetrics::horizontalAdvance() was introduced.
      */
     int TextWidth(const QFontMetrics& fm, const QString& text);
 
