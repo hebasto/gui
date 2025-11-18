@@ -156,7 +156,8 @@ public:
 
             qInfo() << "+++ hint AFTER calculations: " << hint;
 
-            opt.rect = rect();
+            // opt.rect = rect();
+            opt.rect.setSize(hint);
 
             cachedMinimumSizeHint = style()->sizeFromContents(QStyle::CT_SpinBox, &opt, hint, this);
 
