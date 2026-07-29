@@ -53,12 +53,12 @@ inline SocketId StartSpawned(const std::string& connect_info)
     if (!socket) throw std::invalid_argument(strprintf("Invalid socket descriptor '%s'", connect_info));
     return *socket;
 }
+#endif
 
 inline ThreadContext& CurrentThread()
 {
     return g_thread_context;
 }
-#endif
 } // namespace mp
 
 #endif // BITCOIN_IPC_UTIL_H

@@ -9,6 +9,7 @@
 #include <ipc/capnp/protocol.h>
 #include <ipc/exception.h>
 #include <ipc/protocol.h>
+#include <ipc/util.h>
 #include <kj/async.h>
 #include <mp/proxy-io.h>
 #include <mp/proxy-types.h>
